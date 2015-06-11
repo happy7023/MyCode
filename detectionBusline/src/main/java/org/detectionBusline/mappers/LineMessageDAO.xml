@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.xwp.daos.GetLineMessage">
+
+	<resultMap id = "listLineMessage" type = "LineMessage">
+		<result column="id" property="id" />
+		<result column="upstartstationid" property="upstartstationid" />
+		<result column="upendstationid" property="upendstationid" />
+		<result column="downstartstationid" property="downstartstationid" />
+		<result column="downendstationid" property="downendstationid" />
+		<result column="length" property="length" />
+	</resultMap>
+	
+	<select id = "getLineMessage" resultMap = "listLineMessage">
+		select t.id,
+	       t.upstartstationid,
+	       t.upendstationid,
+	       t.downstartstationid,
+	       t.downendstationid,
+	       t2.length
+		  from T_BUSLINE t, T_BUSLINE_2 t2
+		 where t.id = t2.id
+		   and t2.length > 0
+	</select>
+	<insert id="addBusLineAveSpeed" parameterType="BusLineAveSpeed">
+		INSERT INTO T_BUS_LINE_SPEED_CXZS
+			(t_date,t_hour,lineid,numb,speed,starttime,endtime,cxzs,upORdown) 
+		VAlues(#{t_date},#{t_hour},#{lineID}, #{numb}, #{speed}, #{starttime}, #{endtime},#{cxzs}, #{upORdown})
+	</insert>
+	
+	<insert id="addBusLineAveSpeed1Hour" parameterType="BusCXZS">
+		INSERT INTO T_BUS_LINE_AVE_SPEED_1HOUR
+			(date_yyyymmdd,date_hour,speed,cxzs) 
+		VAlues(#{date_yyyymmdd}, #{date_hour}, #{speed}, #{cxzs})
+	</insert>
+	
+	<insert id="addBusCXZS" parameterType="BusCXZS">
+		INSERT INTO ${tablename}
+		VAlues(#{date_yyyymmdd}, #{date_hour}, #{speed}, #{cxzs},#{data_sum}, #{ID})
+	</insert>
+</mapper>

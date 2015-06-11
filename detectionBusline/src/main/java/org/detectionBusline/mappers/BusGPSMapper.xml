@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xwp.daos.BusGPSDAO">
+	<resultMap id = "listGPS" type = "BusGPS">
+		<result column="numb" property="numb" />
+		<result column="latitude" property="latitude" />
+		<result column="longitude" property="longitude" />
+		<result column="angle" property="angle" />
+		<result column="speed" property="speed" />
+		<result column="time" property="time" />
+		<result column="zk_create_time" property="zk_create_time" />
+		<result column="lineID" property="lineID" />
+		<result column="road_id" property="road_id" />
+		<result column="mark" property="mark" />
+	</resultMap>
+	
+	<select id = "getBusGPS" parameterType="java.lang.String" resultMap = "listGPS">
+		select * from T_BUSGPSLOG_20150529 t where t.lineid = 339 and t.numb !=0 and t.lineid != 0 and t.mark !=2 order by t.time
+	</select>
+	
+</mapper>

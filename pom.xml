@@ -24,5 +24,6 @@
   </dependencies>
   <modules>
     <module>udpClinet</module>
+    <module>detectionBusline</module>
   </modules>
 </project>

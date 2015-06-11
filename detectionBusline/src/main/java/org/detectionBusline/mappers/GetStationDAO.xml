@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.xwp.daos.GetStation">
+
+	<resultMap id = "listStation" type = "Station">
+		<result column="id" property="id" />
+		<result column="longitude" property="longitude" />
+		<result column="latitude" property="latitude" />
+		<result column="shortname" property="shortname" />
+	</resultMap>
+	
+	<select id = "getStation" resultMap = "listStation">
+		select t.id,t.longitude,t.latitude from T_BUSSTATION t
+	</select>
+	
+	<insert id = "addSevenStationFlow" parameterType = "StationFlow">
+		insert into T_SEVEN_STATION_FLOW values(#{t_date},#{t_hour},#{station_name},#{sum_shifts})
+	</insert>
+	
+	<resultMap id = "listEF" type = "EF">
+		<result column="v_areaname" property="v_areaname" />
+		<result column="wkt" property="wkt" />
+	</resultMap>
+	
+	<select id="getEF" resultMap="listEF">
+		SELECT t.v_areaname, SDE.st_astext(SHAPE) wkt FROM GRID t
+	</select>
+	
+	<insert id="addElecFencce" parameterType = "ElectronicFenceSpeedCXZS">
+		insert into T_BUS_AREA_SPEED_CXZS(t_date,t_Hour,Speed,cxzs,area) 
+			values(#{t_date},#{t_hour},#{speed},#{cxzs},#{area_name})
+	</insert>
+	
+</mapper>
