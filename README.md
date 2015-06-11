@@ -1,4 +1,4 @@
 MyTest
 ======
 
-just some my project
+just some my code
