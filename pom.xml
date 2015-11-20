@@ -26,5 +26,6 @@
     <module>udpClinet</module>
     <module>detectionBusline</module>
     <module>jt809</module>
+    <module>stormACK</module>
   </modules>
 </project>
