@@ -1,0 +1,88 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+	  <groupId>com.xwp.code</groupId>
+	  <artifactId>MyCode</artifactId>
+	  <version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<groupId>com.common</groupId>
+	<artifactId>sparkTest</artifactId>
+	<packaging>jar</packaging>
+	<name>sparkTest</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<hdfs_version>2.7</hdfs_version>
+	</properties>
+	<dependencies>
+		<!-- spark 的基本配置开始 -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-core_2.10</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<!-- spark 的基本配置结束 -->
+		<!-- spark 访问hadoop的HDFS文件系统 -->
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-client</artifactId>
+			<version>2.7.3</version>
+		</dependency>
+		<!-- spark streaming 配置依赖开始-->
+		<!-- spark-streaming 核心-->
+		<dependency>
+		    <groupId>org.apache.spark</groupId>
+		    <artifactId>spark-streaming_2.10</artifactId>
+		    <version>2.1.0</version>
+		</dependency>
+		<!-- 从不同的数据源获取数据需要添加不同的依赖，
+			spark-streaming-kafka_2.10
+			spark-streaming-flume_2.10
+			spark-streaming-kinesis-asl_2.10
+			spark-streaming-twitter_2.10
+			spark-streaming-zeromq_2.10
+			spark-streaming-mqtt_2.10
+		 例如从kafka添加数据-->
+		<!-- spark streaming 从kafka获取数据-->
+		<dependency>
+		    <groupId>org.apache.spark</groupId>
+		    <artifactId>spark-streaming-kafka_2.10</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+		
+	</dependencies>
+	<build>
+        <plugins>
+			<plugin>
+				 <artifactId>maven-assembly-plugin</artifactId>
+				 <configuration>
+				      <archive>
+				           <manifest>
+				                <mainClass>org.shirdrn.spark.job.UserAgentStats</mainClass>
+				           </manifest>
+				      </archive>
+				      <descriptorRefs>
+				           <descriptorRef>jar-with-dependencies</descriptorRef>
+				      </descriptorRefs>
+				      <excludes>
+				           <exclude>*.properties</exclude>
+				           <exclude>*.xml</exclude>
+				      </excludes>
+				 </configuration>
+				 <executions>
+				      <execution>
+				           <id>make-assembly</id>
+				           <phase>package</phase>
+				           <goals>
+				                <goal>single</goal>
+				           </goals>
+				      </execution>
+				 </executions>
+				</plugin>
+        </plugins>
+    </build>
+</project>

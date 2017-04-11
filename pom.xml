@@ -28,5 +28,6 @@
     <module>jt809</module>
     <module>stormACK</module>
     <module>stormLogAndGroupAndPackage</module>
+    <module>sparkTest</module>
   </modules>
 </project>
